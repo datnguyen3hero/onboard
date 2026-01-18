@@ -10,6 +10,7 @@
   - files       # File operations (3 workers max)
   - alert_acknowledgments
   - long_tasks
+  - retry
 
 :limits:
   files: 3
@@ -19,15 +20,9 @@
 :scheduler:
   :enabled: true
   :schedule:
-#    pull_applicants:
-#      class: Candidates::PullApplicantsWorker
-#      cron: '0 */3 * * *' # At every 3 hours
-#    correct_hiring_status:
-#      class: MarketplaceBusinessesSetting::CorrectHiringStatusWorker
-#      cron: '0 0 * * *' # At every 0H UTC / 8H AU
     mark_overdue_alert:
       class: MarkOverdueWorker
       cron: '0 0 * * * *'
-    long_task_cronjob:
-      class: LongTaskWorker
-      cron: '0 * * * * *'
+#    long_task_cronjob:
+#      class: LongTaskWorker
+#      cron: '*/30 * * * * *'

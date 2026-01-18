@@ -1,0 +1,13 @@
+welcome:
+  id: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+  type: "Alert"
+  title: "Welcome"
+  body: "Welcome body"
+  active: true
+
+reminder:
+  id: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+  type: "Alert"
+  title: "Reminder"
+  body: "Reminder body"
+  active: true
