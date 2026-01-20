@@ -7,12 +7,17 @@ class AlertService
   end
 
   def acknowledge_alert(user)
-    SendNotificationWorker.perform_async(user.id, @alert.id)
-    FeatureFlagAssistant.on?(:feature_code,  {
+    test_fl = FeatureFlagAssistant.on?(:dat_nguyen_local_fl_test_01, {
       organisation: "organisation_uuid",
       member: "member_uuid",
       user: "user_uuid"
     })
+
+    # Similate the case when feature flag is off
+    # if test_fl == false
+    #   Rails.logger.warn "Feature flag 'dat_nguyen_local_fl_test_01' is OFF. Skipping alert acknowledgment."
+    #   return false
+    # end
 
 
     if alert&.acknowledge?

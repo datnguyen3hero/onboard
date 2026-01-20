@@ -91,7 +91,18 @@ gem 'sidekiq-scheduler'
 # Pagination.
 gem 'kaminari'
 
+gem 'karafka'
+gem "karafka-web", "~> 0.8.2"
+
 
 source 'https://gem.fury.io/eh-devops/' do
-  gem 'feature_flag_assistant'
+  gem 'eh_protobuf', '1.16.592'
+  gem 'eh_protobuf_core', '5.3.0'
+  gem 'feature_flag_assistant', '~> 7.0.0'
 end
+
+gem 'grape-swagger'           # Core OpenAPI generation
+gem 'grape-swagger-entity'    # Entity documentation support
+gem 'grape-swagger-rails'     # Rails integration
+
+

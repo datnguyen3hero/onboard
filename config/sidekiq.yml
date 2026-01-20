@@ -23,6 +23,6 @@
     mark_overdue_alert:
       class: MarkOverdueWorker
       cron: '0 0 * * * *'
-#    long_task_cronjob:
-#      class: LongTaskWorker
-#      cron: '*/30 * * * * *'
+    long_task_cronjob:
+      class: LongTaskWorker
+      cron: '*/30 * * * * *'

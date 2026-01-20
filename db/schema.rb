@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_01_12_094351) do
+ActiveRecord::Schema[7.1].define(version: 2026_01_20_071118) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -25,6 +25,18 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_12_094351) do
     t.index ["alert_id"], name: "index_alert_subscriptions_on_alert_id"
     t.index ["user_id", "alert_id"], name: "index_alert_subscriptions_on_user_id_and_alert_id", unique: true
     t.index ["user_id"], name: "index_alert_subscriptions_on_user_id"
+  end
+
+  create_table "alert_summary", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string "alert_summary_type", null: false
+    t.string "title", null: false
+    t.string "body"
+    t.boolean "active", default: true
+    t.string "summary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["alert_summary_type"], name: "index_alert_summary_on_alert_summary_type"
+    t.index ["title"], name: "index_alert_summary_on_title"
   end
 
   create_table "alerts", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

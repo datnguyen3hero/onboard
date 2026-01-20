@@ -39,6 +39,8 @@ module Api
             return
           end
 
+          AlertProducer.new(new_alert).publish('create')
+
           render json: {
             data: {
               id: new_alert.id,
@@ -57,6 +59,9 @@ module Api
             render json: { errors: @alert.errors.full_messages }, status: 422
             return
           end
+
+          AlertProducer.new(@alert).publish('update')
+
           render json: {
             data: {
               id: @alert.id,
@@ -73,6 +78,9 @@ module Api
           # destroy: will run full life-cycle callbacks for example: before_destroy, after_destroy
           # delete: will remove the record from database without running any callbacks
           @alert.destroy
+
+          AlertProducer.new(@alert).publish('delete')
+
           render json: { message: "Alert deleted successfully" }, status: :no_content
         end
 
