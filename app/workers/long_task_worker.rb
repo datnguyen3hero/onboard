@@ -1,5 +1,5 @@
-class LongTaskWorker
-  include Sidekiq::Worker
+class LongTaskWorker < BaseWorker
+  # include Sidekiq::Worker
 
   BACKOFF_DELAY_SECONDS = 5
 
@@ -19,7 +19,20 @@ class LongTaskWorker
     Rails.logger.error("LongTaskWorker retries exhausted after #{job['retry_count']} attempts for jid=#{job['jid']} queue=#{job['queue']}: #{exception.message}")
   end
 
-  def perform(*args)
+  # def perform(*args)
+  #   Rails.logger.info("LongTaskWorker#perform with args: #{args.inspect}")
+  #   sleep_time = rand(1..10)
+  #   Rails.logger.info "LongTaskWorker jid=#{jid} started for #{sleep_time} seconds"
+  #   # raise StandardError, 'Simulated random failure in LongTaskWorker' if rand(2).zero?
+  #
+  #   sleep(sleep_time.seconds)
+  #   Rails.logger.info "LongTaskWorker jid=#{jid} finished"
+  # rescue StandardError => e
+  #   Rails.logger.error "LongTaskWorker jid=#{jid} encountered an error: #{e.message}"
+  #   raise e
+  # end
+
+  def call(*args)
     Rails.logger.info("LongTaskWorker#perform with args: #{args.inspect}")
     sleep_time = rand(1..10)
     Rails.logger.info "LongTaskWorker jid=#{jid} started for #{sleep_time} seconds"

@@ -1,4 +1,5 @@
 require_relative "boot"
+require_relative '../app/middleware/performance_monitor'
 
 require "rails/all"
 
@@ -27,6 +28,7 @@ module AlertSubscription
 
     # config Rack attack middleware
     config.middleware.use Rack::Attack
+    config.middleware.use PerformanceMonitor
 
     config.cache_store = :memory_store, { expires_in: 1.hour }
 

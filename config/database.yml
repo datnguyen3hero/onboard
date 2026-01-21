@@ -9,6 +9,9 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   encoding: unicode
+  checkout_timeout: 5    # 5 seconds to checkout from pool
+  reaping_frequency: 10  # Clean up idle connections every 10 seconds
+  verify_timeout: 30     # Verify connection every 30 seconds
 
 development:
   <<: *default

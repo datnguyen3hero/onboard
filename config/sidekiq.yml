@@ -1,4 +1,6 @@
-:concurrency: 10
+:concurrency: <%= ENV.fetch('SIDEKIQ_CONCURRENCY', 10) %>
+:timeout: 30
+:verbose: false
 
 :queues:
   - critical    # System-critical operations
@@ -26,3 +28,8 @@
     long_task_cronjob:
       class: LongTaskWorker
       cron: '*/30 * * * * *'
+
+# Dead job retention
+:dead_max_jobs: 10000
+:dead_timeout_in_seconds: 180  # 3 hours
+

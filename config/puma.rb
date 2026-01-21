@@ -42,3 +42,26 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
+
+
+worker_boot_timeout 60
+worker_shutdown_timeout 30
+
+# Logging
+quiet false unless ENV['RAILS_ENV'] == 'production'
+# Worker lifecycle callbacks
+on_worker_boot do
+  Rails.logger.info "Worker #{Process.pid} starting up"
+  # Reconnect to database after forking
+  ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
+  # Reconnect to Redis
+  if defined?(Redis)
+    Redis.current.disconnect!
+    Rails.logger.info "Redis reconnected in worker #{Process.pid}"
+  end
+end
+before_fork do
+  Rails.logger.info "Worker forking from master #{Process.pid}"
+  ActiveRecord::Base.connection_pool.disconnect! if defined?(ActiveRecord)
+end
+
