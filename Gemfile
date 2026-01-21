@@ -9,7 +9,7 @@ gem 'rails', '~> 7.1.5', '>= 7.1.5.2'
 gem 'sprockets-rails'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '>= 1.4'
+# gem 'sqlite3', '>= 1.4'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '>= 5.0'
@@ -80,11 +80,13 @@ end
 gem 'pg'
 gem 'rack', '~> 2.2'
 
+# middleware for rate limiting and throttling
 gem 'rack-attack'
 
 gem 'jsonapi-serializer'
 gem 'pundit'
 
+# Background job processing
 gem 'sidekiq', '~> 7.1' # or a newer version
 gem 'sidekiq-scheduler'
 
@@ -94,16 +96,19 @@ gem 'kaminari'
 gem 'karafka'
 gem "karafka-web", "~> 0.8.2"
 
-
 source 'https://gem.fury.io/eh-devops/' do
   gem 'eh_protobuf', '1.16.592'
   gem 'eh_protobuf_core', '5.3.0'
   gem 'feature_flag_assistant', '~> 7.0.0'
 end
 
-gem 'grape-swagger'           # Core OpenAPI generation
-gem 'grape-swagger-entity'    # Entity documentation support
-gem 'grape-swagger-rails'     # Rails integration
+gem 'grape-swagger' # Core OpenAPI generation
+gem 'grape-swagger-entity' # Entity documentation support
+gem 'grape-swagger-rails' # Rails integration
 
 gem 'grpc'
 gem 'grpc-tools'
+
+gem 'faraday'
+gem 'httparty'
+

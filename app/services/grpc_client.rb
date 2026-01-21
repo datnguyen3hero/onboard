@@ -38,7 +38,8 @@ class RpcClient
       end
 
       @retries += 1
-      sleep(2**@retries) # Exponential backoff
+      sleep_time = exponential_backoff_interval(@retries)
+      sleep(sleep_time)
       Rails.logger.warn "Retrying gRPC call #{method}, attempt #{@retries} due to error: #{e.message}"
       retry
     end
@@ -53,5 +54,13 @@ class RpcClient
   def retryable_error?(error)
     # Check for specific internal errors that are retryable
     RETRYABLE_ERRORS.include?(error.class)
+  end
+
+  def exponential_backoff_interval(retry_count)
+    # Base exponential backoff: 2^retry_count
+    base_delay = 2**@retries
+    # Add jitter: random value between 0 and (10 * (retry_count + 1))
+    jitter = rand(10) * (retry_count + 1)
+    base_delay + jitter
   end
 end
