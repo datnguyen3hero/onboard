@@ -28,7 +28,8 @@ class AlertConsumer < ApplicationConsumer
     when 'create'
       Rails.logger.info "Alert summary created: #{data}"
       alert_summary = SummaryMessageService.new(data[:body]).generate_summary
-      data['summary'] = alert_summary
+      ranking = RankingPriorityMessageService.new(data[:body]).get_ranking_priority
+      data['summary'] = "#{alert_summary} (Ranking Priority: #{ranking})"
       AlertSummary.create_from_mapped_data!(data)
     when 'update'
       Rails.logger.info "Alert summary updated: #{data}"
@@ -38,7 +39,8 @@ class AlertConsumer < ApplicationConsumer
         return
       end
       alert_summary = SummaryMessageService.new(data[:body]).generate_summary
-      data['summary'] = alert_summary
+      ranking = RankingPriorityMessageService.new(data[:body]).get_ranking_priority
+      data['summary'] = "#{alert_summary} (Ranking Priority: #{ranking})"
       existed_record.update_from_mapped_data!(data)
     when 'delete'
       Rails.logger.info "Alert summary deleted: #{data}"

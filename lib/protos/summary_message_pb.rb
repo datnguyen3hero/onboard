@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 
-descriptor_data = "\n\x15summary_message.proto\x12\x0esummarymessage\"#\n\x13\x41lertMessageRequest\x12\x0c\n\x04\x62ody\x18\x01 \x01(\t\".\n\x0fSummaryResponse\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0f\n\x07summary\x18\x02 \x01(\t2m\n\x15SummaryMessageManager\x12T\n\nGetSummary\x12#.summarymessage.AlertMessageRequest\x1a\x1f.summarymessage.SummaryResponse\"\x00\x62\x06proto3"
+descriptor_data = "\n\x15summary_message.proto\x12\x0esummarymessage\"#\n\x13\x41lertMessageRequest\x12\x0c\n\x04\x62ody\x18\x01 \x01(\t\".\n\x0fSummaryResponse\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0f\n\x07summary\x18\x02 \x01(\t\"%\n\x15RakingPriorityRequest\x12\x0c\n\x04\x62ody\x18\x01 \x01(\t\"6\n\x16RakingPriorityResponse\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x10\n\x08priority\x18\x02 \x01(\t2m\n\x15SummaryMessageManager\x12T\n\nGetSummary\x12#.summarymessage.AlertMessageRequest\x1a\x1f.summarymessage.SummaryResponse\"\x00\x32}\n\x15RakingPriorityManager\x12\x64\n\x11GetRakingPriority\x12%.summarymessage.RakingPriorityRequest\x1a&.summarymessage.RakingPriorityResponse\"\x00\x62\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)
@@ -13,4 +13,6 @@ pool.add_serialized_file(descriptor_data)
 module Summarymessage
   AlertMessageRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("summarymessage.AlertMessageRequest").msgclass
   SummaryResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("summarymessage.SummaryResponse").msgclass
+  RakingPriorityRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("summarymessage.RakingPriorityRequest").msgclass
+  RakingPriorityResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("summarymessage.RakingPriorityResponse").msgclass
 end

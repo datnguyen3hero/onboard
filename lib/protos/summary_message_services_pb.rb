@@ -20,4 +20,20 @@ module Summarymessage
 
     Stub = Service.rpc_stub_class
   end
+  module RakingPriorityManager
+    # we have another service in the same file
+    class Service
+
+      include ::GRPC::GenericService
+
+      self.marshal_class_method = :encode
+      self.unmarshal_class_method = :decode
+      self.service_name = 'summarymessage.RakingPriorityManager'
+
+      # RPC method to get raking priority
+      rpc :GetRakingPriority, ::Summarymessage::RakingPriorityRequest, ::Summarymessage::RakingPriorityResponse
+    end
+
+    Stub = Service.rpc_stub_class
+  end
 end

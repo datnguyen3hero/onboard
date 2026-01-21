@@ -23,7 +23,7 @@ class LongTaskWorker
     Rails.logger.info("LongTaskWorker#perform with args: #{args.inspect}")
     sleep_time = rand(1..10)
     Rails.logger.info "LongTaskWorker jid=#{jid} started for #{sleep_time} seconds"
-    raise StandardError, 'Simulated random failure in LongTaskWorker' if rand(2).zero?
+    # raise StandardError, 'Simulated random failure in LongTaskWorker' if rand(2).zero?
 
     sleep(sleep_time.seconds)
     Rails.logger.info "LongTaskWorker jid=#{jid} finished"
