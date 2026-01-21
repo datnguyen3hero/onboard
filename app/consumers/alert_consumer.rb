@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# Example consumer that prints messages payloads
 class AlertConsumer < ApplicationConsumer
   def consume
     messages.each do |message|
@@ -28,6 +27,8 @@ class AlertConsumer < ApplicationConsumer
     case event_type
     when 'create'
       Rails.logger.info "Alert summary created: #{data}"
+      alert_summary = SummaryMessageService.new(data[:body]).generate_summary
+      data['summary'] = alert_summary
       AlertSummary.create_from_mapped_data!(data)
     when 'update'
       Rails.logger.info "Alert summary updated: #{data}"
@@ -36,6 +37,8 @@ class AlertConsumer < ApplicationConsumer
         Rails.logger.warn "Alert summary to update not found: #{data}"
         return
       end
+      alert_summary = SummaryMessageService.new(data[:body]).generate_summary
+      data['summary'] = alert_summary
       existed_record.update_from_mapped_data!(data)
     when 'delete'
       Rails.logger.info "Alert summary deleted: #{data}"

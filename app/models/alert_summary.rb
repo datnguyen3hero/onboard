@@ -7,7 +7,8 @@ class AlertSummary < ApplicationRecord
     'alert_type' => 'alert_summary_type',
     'title' => 'title',
     'body' => 'body',
-    'active' => 'active'
+    'active' => 'active',
+    'summary' => 'summary'
   }.freeze
 
   # Map external data fields to model attributes

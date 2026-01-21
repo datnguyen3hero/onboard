@@ -105,4 +105,5 @@ gem 'grape-swagger'           # Core OpenAPI generation
 gem 'grape-swagger-entity'    # Entity documentation support
 gem 'grape-swagger-rails'     # Rails integration
 
-
+gem 'grpc'
+gem 'grpc-tools'

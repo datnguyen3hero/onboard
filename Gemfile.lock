@@ -217,6 +217,7 @@ GEM
     grpc (1.74.0-x86_64-linux-gnu)
       google-protobuf (>= 3.25, < 5.0)
       googleapis-common-protos-types (~> 1.0)
+    grpc-tools (1.76.0)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.2.3)
@@ -487,6 +488,8 @@ DEPENDENCIES
   grape-swagger-entity
   grape-swagger-rails
   grape_on_rails_routes
+  grpc
+  grpc-tools
   importmap-rails
   jbuilder
   jsonapi-serializer

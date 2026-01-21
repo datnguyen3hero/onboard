@@ -29,5 +29,7 @@ module AlertSubscription
     config.middleware.use Rack::Attack
 
     config.cache_store = :memory_store, { expires_in: 1.hour }
+
+    config.autoload_paths << Rails.root.join('lib')
   end
 end
