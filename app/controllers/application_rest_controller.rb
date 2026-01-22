@@ -2,6 +2,8 @@ class ApplicationRestController < ActionController::API
   include ErrorHandling
   include Pundit
   include PaginationHelper
+  include ConnectionMonitoring
+  include DeprecationHeaders
 
   rescue_from ActiveRecord::ConnectionTimeoutError do |e|
     Rails.logger.error("Connection pool exhausted: #{e.message}")

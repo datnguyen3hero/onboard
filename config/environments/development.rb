@@ -74,4 +74,18 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+
+
+  # Enable SQL logging
+  config.log_level = :debug
+  # Log slow queries
+  config.after_initialize do
+    ActiveSupport::Notifications.subscribe('sql.active_record') do |name, started, finished, unique_id, data|
+      duration = finished - started
+      if duration > 0.1  # Log queries taking more than 100ms
+        Rails.logger.warn("SLOW QUERY (#{(duration * 1000).round(2)}ms): #{data[:sql]}")
+      end
+    end
+  end
+
 end

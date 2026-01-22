@@ -3,8 +3,8 @@
 :verbose: false
 
 :queues:
-  - critical    # System-critical operations
-  - default     # Standard business operations
+  - [critical, 7]    # System-critical operations
+  - [default, 3]     # Standard business operations
   - low         # Background maintenance
   - candidate   # Candidate processing
   - mailers     # Email communications
@@ -24,7 +24,8 @@
   :schedule:
     mark_overdue_alert:
       class: MarkOverdueWorker
-      cron: '0 0 * * * *'
+#      cron: '0 0 * * * *'
+      cron: '*/30 * * * * *'
     long_task_cronjob:
       class: LongTaskWorker
       cron: '*/30 * * * * *'

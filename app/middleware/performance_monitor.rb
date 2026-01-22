@@ -1,5 +1,19 @@
 # frozen_string_literal: true
 
+# Rack middleware for monitoring application performance metrics.
+#
+# This middleware tracks request processing time, database query counts,
+# and logs performance data for each request. It also adds custom headers
+# to responses with performance information and warns about slow requests.
+#
+# @example Usage in Rails application
+#   # config/application.rb
+#   config.middleware.use PerformanceMonitor
+#
+# @example Response headers added
+#   X-Response-Time: 123.45ms
+#   X-DB-Query-Count: 15
+#   X-Worker-PID: 12345
 class PerformanceMonitor
   def initialize(app)
     @app = app

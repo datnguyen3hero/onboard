@@ -41,6 +41,8 @@ module Api
         end
 
         def acknowledge
+          add_deprecation_warning('v1', 3.months.from_now, 'v2')
+
           alert = @current_user&.find_alert_by_id(params[:id])
           acknowledge_result = AlertService.new(alert).acknowledge_alert(@current_user)
 

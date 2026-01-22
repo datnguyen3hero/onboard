@@ -2,7 +2,8 @@ class SecureController < ApplicationRestController
   # only open getter for current_user variable
   attr_reader :current_user
   # hook runs before every action in controllers that inherit from SecureController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :log_connection_stats
+  after_action :log_connection_stats
 
   private
 
