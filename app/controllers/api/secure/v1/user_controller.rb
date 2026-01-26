@@ -56,7 +56,7 @@ module Api
         private
 
         def user_params
-          params.require(:user).permit(:name, :email, :timezone, :token)
+          params.require(:user).permit(:name, :email, :timezone)
         end
       end
     end

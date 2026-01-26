@@ -1,6 +1,7 @@
 require_relative "helpers/api_helpers"
 require_relative "entities/alert_entity"
 require_relative "entities/user_entity"
+require_relative "resources/auth_api"
 require_relative "resources/users_api"
 require_relative "resources/alerts_api"
 
@@ -31,6 +32,7 @@ class BaseApi < Grape::API
     error!({ error: 'You are not authorized to perform this action.' }, 403)
   end
 
+  mount AuthAPI
   mount UsersAPI
   mount AlertsAPI
 

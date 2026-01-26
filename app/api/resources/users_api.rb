@@ -6,7 +6,7 @@ class UsersAPI < Grape::API
     params do
       requires :name, type: String
       requires :email, type: String
-      requires :token, type: String
+      requires :password, type: String
       optional :timezone, type: String, default: "UTC"
     end
     post do

@@ -1,5 +1,9 @@
 class User < ApplicationRecord
   self.table_name = :users
+
+  # Enable bcrypt password encryption
+  has_secure_password
+
   # in parent table, we use has_many to define one-to-many relationship.
   has_many :user_login_log
   # dependent: :destroy ensures that when a user is deleted, all associated alert subscriptions are also deleted.
@@ -9,6 +13,7 @@ class User < ApplicationRecord
   has_many :alerts, through: :"alert_subscription_models"
 
   validates :email, presence: true, uniqueness: true
+  validates :password, presence: true, length: { minimum: 6 }, if: :password_required?
 
   # b) Write a query to find all users who are subscribed to a specific alert.
   def self.subscribed_to(alert_or_id)
@@ -24,5 +29,11 @@ class User < ApplicationRecord
 
   def alerts_count
     @alerts_count ||= alerts.count
+  end
+
+  private
+
+  def password_required?
+    password_digest.nil? || password.present?
   end
 end
